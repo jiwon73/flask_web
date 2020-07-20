@@ -1,5 +1,6 @@
 
 from flask import Flask, render_template
+from data import Articles
 
 app = Flask(__name__)
 app.debug=True
@@ -20,7 +21,9 @@ def about():
 @app.route ('/articles')
 def articles():
     print("success")
-    return render_template('articles.html',hello='Garykim')
+    articles=Articles()
+    print(len(articles))
+    return render_template('articles.html',articles=articles)
 
 
 if __name__=='__main__':
