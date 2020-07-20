@@ -4,11 +4,23 @@ from flask import Flask, render_template
 app = Flask(__name__)
 app.debug=True
 
-@app.route ('/data') #경로지정, 'local host:5000/data'로 요청이 오면 반응
+
+@app.route ('/')
+# @app.route ('/data', methods=['GET','POST']) #경로지정, 'local host:5000/data'로 요청이 오면 반응
 def index():
     print("success")
     # return "test"
-    return render_template('home.html') #text값을 html문서로 반환
+    return render_template('home.html',hello='Garykim') #text값을 html문서로 반환
+
+@app.route ('/about')
+def about():
+    print("success")
+    return render_template('about.html',hello='Garykim')
+
+@app.route ('/articles')
+def articles():
+    print("success")
+    return render_template('articles.html',hello='Garykim')
 
 
 if __name__=='__main__':
