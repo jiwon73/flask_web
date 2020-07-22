@@ -19,7 +19,7 @@ db = pymysql.connect(host='localhost',
                         user='root', 
                         passwd='1234', 
                         db='myflaskapp')
-
+                        
 #init mysql 
 # mysql = MySQL(app)
 # cur  = mysql.connection.cursor()
@@ -58,6 +58,7 @@ def register():
             cursor.execute(sql,(name,email,username,password))
             db.commit()
             
+
             # cursor.execute('SELECT* FROM users;')
             # users=cursor.fetchall()
             # return users 
@@ -66,9 +67,9 @@ def register():
             return "Register Success"
         else: 
             return "Invalid Password"
-            
+        db.close()   
     else:
-        return "GET success"
+        return render_template('register.html')
 
 @app.route('/about')
 def about():
