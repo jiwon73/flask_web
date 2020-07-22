@@ -2,6 +2,7 @@ from flask import Flask ,render_template , flash , redirect , url_for, session, 
 #from flask_mysqldb import MySQL
 import pymysql
 from data import Articles
+from passlib.hash import pbkdf2_sha256
 
 
 app = Flask(__name__)
@@ -42,12 +43,15 @@ def register():
         # data=request.body.get('author')
         name=request.form.get('name')
         email=request.form.get('email')
-        password=request.form.get('password')
+        password=pbkdf2_sha256.hash(request.form.get('password'))
         re_password=request.form.get('re_password')
         username=request.form.get('username')
         # name=form.name.data
-        if (password == re_password):
-            print([name, email, password, re_password, username])
+        
+        #if(password==re_password)
+        if (pbkdf2_sha256.verify(re_password,password)):
+            print(pbkdf2_sha256.verify(re_password,password))
+            #print([name, email, password, re_password, username])
             
             cursor=db.cursor()
 
